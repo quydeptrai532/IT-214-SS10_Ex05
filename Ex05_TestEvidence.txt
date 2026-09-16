@@ -1,0 +1,23 @@
+=== KET QUA CHAY TEST (Embedded Kafka) - Ex05 ===
+Test: OrderTrackingOrderingTest.suKienCuaCungOrderIdVaoCungMotPartitionVaDungThuTu
+Ket qua: tests=1  failures=0  errors=0
+
+--- 1) Producer gui kem key = orderId; cung don -> CUNG partition, offset tang dan ---
+Gui CREATED cua don O-100 -> partition=3 offset=0
+Gui PAID    cua don O-100 -> partition=3 offset=1
+Gui SHIPPED cua don O-100 -> partition=3 offset=2
+
+--- 2) Don khac -> partition khac (van chay song song giua cac don) ---
+Gui CREATED cua don O-200 -> partition=4 offset=0
+Gui PAID    cua don O-200 -> partition=4 offset=1
+Gui SHIPPED cua don O-200 -> partition=4 offset=2
+
+--- 3) Xac nhan bang consumer doc doc lap: moi orderId chi nam trong 1 partition ---
+>>> Partition cua tung orderId: {O-200=[4], O-100=[3]}
+
+--- 4) Thu tu xu ly dung, khong co vi pham ---
+>>> Thu tu xu ly don O-100: [CREATED, PAID, SHIPPED]
+>>> So vi pham thu tu: 0
+
+Ket luan: topic co 5 partition, nhung nho Partition Key = orderId nen toan bo su kien
+cua mot don luon nam trong 1 partition => thu tu duoc bao toan. So consumer toi da = 5.
